@@ -39,13 +39,12 @@ public static class ArraysTester {
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
-        // 1. I will create a fixed array of dobles to store the numbers.
-        // 2. I will create a variable that will be stored inside the array every time is needed.
-        // 3. Using Big O Notation I will create a for loop of O(n) that is going to run the size of the length.
-        // 4. Using the variable doble of "numbers" that I created, and the parameter of number, I will add them 
-        // together every time the loop starts, then I added the new number in the position of the array, 
-        // using the int "i" of the loop.
-        // 5. Then I will return the new array with the numbers inside.
+        // 1. Create a fixed array of dobles called "listOfMultiples" to store the numbers with the size of the parameter "int length".
+        // 2. Create a variable double called "numbers" with the value of 0 that will be stored inside the array in the future.
+        // 3. Create a for loop that is going to run many times as the number of the parameter int length minus 1.
+        // 4. Inside the for loop update the "numbers" variable adding the parameter of "double number" every time the loop runs.
+        // 5. Inside the loop add the value of "numbers" to the array after is updated.
+        // 6. Then outside the loop return the new array with the numbers inside.
         var listOfMultiples = new double[length];
         double numbers = 0;
         
@@ -73,11 +72,13 @@ public static class ArraysTester {
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
-        // 1. I will create a new list that will store the "data" list from the index 0 to the end of the array minus the amount requested.
-        // 2. If the amount is for example 2 and the array is {1, 2, 3, 4, 5} the new array will store {1, 2, 3} using GetRange method.
-        // 3. Then with the original "data" list I will use RemoveRange method and remove the same values. 
+        // 1. Create a new list of int called "newList".
+        // 2. Update the "newList" using GetRange with List<int> "data" parameter, from the index 0 to the end of the size of the "data" minus the amount parameter. 
+        // If the amount is for example 2 and the array "data" is {1, 2, 3, 4, 5} the new array "newList" will store {1, 2, 3} using GetRange method.
+        // 3. Then with the original "data" list use RemoveRange method and remove the same values(index 0 to the end of the size of the "data" minus the amount). 
         // So if "data" list was {1, 2, 3, 4, 5} after it will be {4, 5}
-        // 4. After I will use a for loop that will add all the values from the "newList" to the original "data" list. 
+        // 4. Create a for loop that is going to run as many times as the size of the "newList".
+        // 5. Insde the for loop, add all the values from the "newList" to the original "data" list. 
         // Doing that will give the effect of rotating the List to the Right.
     
         List<int> newList = new List<int>();
