@@ -39,7 +39,23 @@ public static class ArraysTester {
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
-        return new double[0]; // replace this return statement with your own
+        // 1. I will create a fixed array of dobles to store the numbers.
+        // 2. I will create a variable that will be stored inside the array every time is needed.
+        // 3. Using Big O Notation I will create a for loop of O(n) that is going to run the size of the length.
+        // 4. Using the variable doble of "numbers" that I created, and the parameter of number, I will add them 
+        // together every time the loop starts, then I added the new number in the position of the array, 
+        // using the int "i" of the loop.
+        // 5. Then I will return the new array with the numbers inside.
+        var listOfMultiples = new double[length];
+        double numbers = 0;
+        
+        for (int i = 0; i <= length - 1; i++) 
+        {
+            numbers += number;
+            listOfMultiples[i] = numbers;
+        }
+
+        return listOfMultiples; 
     }
     
     /// <summary>
@@ -56,6 +72,22 @@ public static class ArraysTester {
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
+
+        // 1. I will create a new list that will store the "data" list from the index 0 to the end of the array minus the amount requested.
+        // 2. If the amount is for example 2 and the array is {1, 2, 3, 4, 5} the new array will store {1, 2, 3} using GetRange method.
+        // 3. Then with the original "data" list I will use RemoveRange method and remove the same values. 
+        // So if "data" list was {1, 2, 3, 4, 5} after it will be {4, 5}
+        // 4. After I will use a for loop that will add all the values from the "newList" to the original "data" list. 
+        // Doing that will give the effect of rotating the List to the Right.
+    
+        List<int> newList = new List<int>();
+
+        newList = data.GetRange(0, data.Count - amount);
+        data.RemoveRange(0, data.Count - amount);
+
+        for (int i = 0; i < newList.Count; i++) {
+            data.Add(newList[i]);
+        }
 
     }
 }
