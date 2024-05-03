@@ -11,20 +11,50 @@ public class CustomerService {
         // Test Cases
 
         // Test 1
-        // Scenario: 
-        // Expected Result: 
+        // Scenario: The user specify an invalid size of the Customer Service Queue of less than or equal to 0
+        // Expected Result: The size shall default to 10 if is less than or equal to 0.
         Console.WriteLine("Test 1");
 
-        // Defect(s) Found: 
+        var costumerServiceQueue = new CustomerService(-2);
+        Console.WriteLine(costumerServiceQueue._maxSize == 10 ? "Works! Invalid size less than 0, default to 10" : "ERROR: Invalid Queue Size");
+        costumerServiceQueue = new CustomerService(0);
+        Console.WriteLine(costumerServiceQueue._maxSize == 10 ? "Works! Invalid size equal to 0, default to 10" : "ERROR: Invalid Queue Size");
+
+        // Defect(s) Found: None.
 
         Console.WriteLine("=================");
 
         // Test 2
-        // Scenario: 
-        // Expected Result: 
+        // Scenario: AddNewCustomer method shall enqueue a new customer into the queue
+        // Expected Result: If the queue is full when trying to add a customer, then an error message will be displayed.
         Console.WriteLine("Test 2");
 
-        // Defect(s) Found: 
+        int sizeOfQueue = 2;
+        costumerServiceQueue = new CustomerService(sizeOfQueue);
+        for (int i = 0; i <= sizeOfQueue; i++) {
+            costumerServiceQueue.AddNewCustomer();
+        }
+        
+
+        // Defect(s) Found: An error message is displayed but after enqueue 1 extra customer. 
+        // To fix this in AddNewCustomer we fix the part that verify if there is room in the 
+        // service queue by changing "if (_queue.Count > _maxSize)" to "if (_queue.Count >= _maxSize)"
+
+        Console.WriteLine("=================");
+
+        // Test 3
+        // Scenario: ServeCustomer function shall dequeue the next customer from the queue and display the details.
+        // Expected Result: If the queue is empty when trying to serve a customer, then an error message will be displayed.
+        Console.WriteLine("Test 3");
+
+        for (int i = 0; i <= sizeOfQueue; i++) {
+            costumerServiceQueue.ServeCustomer();
+        }
+
+        // Defect(s) Found: There is an Index error when trying to display the customer that was served, 
+        // so we move the variable var customer before _queue.RemoveAt(0); and that fixed that problem.
+        // Other problem was when the Queue was empty and we tried to serve a Customer, an error message was not displayed,
+        // to fix this we used try and catch and when there was no Customer to be removed we displayed an error message.
 
         Console.WriteLine("=================");
 
@@ -67,7 +97,7 @@ public class CustomerService {
     /// </summary>
     private void AddNewCustomer() {
         // Verify there is room in the service queue
-        if (_queue.Count > _maxSize) {
+        if (_queue.Count >= _maxSize) {
             Console.WriteLine("Maximum Number of Customers in Queue.");
             return;
         }
@@ -88,9 +118,14 @@ public class CustomerService {
     /// Dequeue the next customer and display the information.
     /// </summary>
     private void ServeCustomer() {
-        _queue.RemoveAt(0);
-        var customer = _queue[0];
-        Console.WriteLine(customer);
+        try {
+            var customer = _queue[0];
+            _queue.RemoveAt(0);
+            Console.WriteLine(customer);
+        } catch {
+            Console.WriteLine("There are no Customers in Queue.");
+        }
+        
     }
 
     /// <summary>
