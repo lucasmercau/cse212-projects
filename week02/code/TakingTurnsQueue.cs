@@ -38,6 +38,11 @@ public class TakingTurnsQueue {
                 person.Turns -= 1;
                 _people.Enqueue(person);
             }
+            if (person.Turns <= 0) { 
+                // I added this. If a person has an infinite number of turns, less than or equal to 0 
+                // they will be enqueued again.
+                _people.Enqueue(person);
+            }
 
             Console.WriteLine(person.Name);
         }

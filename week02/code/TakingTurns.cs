@@ -15,7 +15,9 @@
         // Console.WriteLine(players);    // This can be un-commented out for debug help
         while (players.Length > 0)
             players.GetNextPerson();
-        // Defect(s) Found: 
+        // Defect(s) Found: The enqueue function from PersonQueue inside the AddPerson function was wrong 
+        // and was inserting new players at the beggining and not at the end. For that reason every time
+        // a player is dequeued and added again is in front of the list and not the end, where it should be.
 
         Console.WriteLine("---------");
 
@@ -38,8 +40,9 @@
         while (players.Length > 0)
             players.GetNextPerson();
 
-        // Defect(s) Found: 
-
+        // Defect(s) Found: The enqueue function from PersonQueue inside the AddPerson function was wrong 
+        // and was inserting new players at the beggining and not at the end. For that reason after 5 turns
+        // George is the next person 3 consecutive times.
         Console.WriteLine("---------");
 
         // Test 3
@@ -56,7 +59,8 @@
             players.GetNextPerson();
             // Console.WriteLine(players);
         }
-        // Defect(s) Found: 
+        // Defect(s) Found: Tim is not showing forever in the queue. After 6 turns the queue is empty. 
+        // Also the enqueue is inserting always in the begginign of the list and not the end.
 
         Console.WriteLine("---------");
 
@@ -73,7 +77,8 @@
             players.GetNextPerson();
             // Console.WriteLine(players);
         }
-        // Defect(s) Found: 
+        // Defect(s) Found: Tim is not showing forever in the queue. After 4 turns the queue is empty. 
+        // Also the enqueue is inserting always in the begginign of the list and not the end.
 
         Console.WriteLine("---------");
 
@@ -83,6 +88,6 @@
         Console.WriteLine("Test 5");
         players = new TakingTurnsQueue();
         players.GetNextPerson();
-        // Defect(s) Found:
+        // Defect(s) Found: None. The Error message was displayed.
     }
 }
