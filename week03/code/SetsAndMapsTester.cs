@@ -111,6 +111,17 @@ public static class SetsAndMapsTester {
         // To display the pair correctly use something like:
         // Console.WriteLine($"{word} & {pair}");
         // Each pair of words should displayed on its own line.
+        var set1 = words.ToHashSet();
+        var set2 = new HashSet<string>();
+        foreach (string word in words) {
+            string pair = word[1] + "" + word[0];
+            if (set1.Contains(pair) && !set2.Contains(word) && word != pair) {
+                Console.WriteLine($"{word} & {pair}");
+                set2.Add(word);
+                set2.Add(pair);
+            }
+            
+        }
     }
 
     /// <summary>
@@ -132,6 +143,11 @@ public static class SetsAndMapsTester {
         foreach (var line in File.ReadLines(filename)) {
             var fields = line.Split(",");
             // Todo Problem 2 - ADD YOUR CODE HERE
+            if (!degrees.ContainsKey(fields[3])) {
+                degrees[fields[3]] = 1;
+            } else {
+                degrees[fields[3]] += 1;
+            }
         }
 
         return degrees;
@@ -158,6 +174,35 @@ public static class SetsAndMapsTester {
     /// #############
     private static bool IsAnagram(string word1, string word2) {
         // Todo Problem 3 - ADD YOUR CODE HERE
+        var dic1 = new Dictionary<char, int>();
+        var dic2 = new Dictionary<char, int>();
+        word1 = word1.Replace(" ", "").ToUpper();
+        word2 = word2.Replace(" ", "").ToUpper();
+        if (word1.Length == word2.Length) {
+            foreach (char letter in word1) {
+                if (!dic1.ContainsKey(letter)) {
+                    dic1[letter] = 1;
+                } else {
+                    dic1[letter] += 1;
+                }
+            }
+            foreach (char letter in word2) {
+                if (!dic2.ContainsKey(letter)) {
+                    dic2[letter] = 1;
+                } else {
+                    dic2[letter] += 1;
+                }
+            }
+            foreach (char letter in dic1.Keys)
+            {
+                if (!dic2.ContainsKey(letter))
+                    return false;
+                if (dic1[letter] != dic2[letter])
+                    return false;    
+            }
+
+            return true;
+        }
         return false;
     }
 
@@ -235,5 +280,8 @@ public static class SetsAndMapsTester {
         // 1. Add code in FeatureCollection.cs to describe the JSON using classes and properties 
         // on those classes so that the call to Deserialize above works properly.
         // 2. Add code below to print out each place a earthquake has happened today and its magitude.
+        foreach (var feature in featureCollection.Features) {
+            Console.WriteLine($"{feature.Properties.Place} - Mag {feature.Properties.Mag}");
+        }
     }
 }
